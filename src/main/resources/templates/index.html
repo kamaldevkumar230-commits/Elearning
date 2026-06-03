@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Platform</title>
+
+
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .hero {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+    }
+    html {
+    scroll-behavior: smooth;
+}
+
+    .course-card {
+        transition: 0.3s;
+    }
+
+    .course-card:hover {
+        transform: scale(1.05);
+    }
+
+    .footer {
+        background: #222;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">E-Learning</a>
+
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+            
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item"><a class="btn btn-primary ms-2" href="/login">Login</a></li>
+            <li class="nav-item"><a class="btn btn-primary ms-2" href="/register">Register</a></li>
+        </ul>
+    </div>
+</div>
+
+</nav>
+
+<!-- Hero Section -->
+
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="hero-slide text-center text-white d-flex align-items-center justify-content-center"
+                 style="background: url('/images/sl 1.jpg') center/cover; height: 80vh;">
+
+                <div>
+                    <h1>Learn Without Limits</h1>
+                    <p class="lead">Start, Switch, or Advance your Career</p>
+                   <a href="#courses-section" class="btn btn-light btn-lg mt-3">
+                    Explore Courses
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="hero-slide text-center text-white d-flex align-items-center justify-content-center"
+                 style="background: url('/images/sl 2.avif') center/cover; height: 80vh;">
+
+                <div>
+                    <h1>Upgrade Your Skills</h1>
+                    <p class="lead">Learn from Industry Experts</p>
+                    <a href="/login" class="btn btn-warning btn-lg mt-3">Get Started</a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <div class="hero-slide text-center text-white d-flex align-items-center justify-content-center"
+                 style="background: url('/images/sl 3.jpg') center/cover; height: 80vh;">
+
+                <div>
+                    <h1>Build Your Future</h1>
+                    <p class="lead">Join Thousands of Learners</p>
+                    <a href="/register" class="btn btn-success btn-lg mt-3">Join Now</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
+
+<!-- Courses Section -->
+
+<div id="courses-section"  class="container mt-5">
+
+    <h3 class="text-center mb-4">📚 Available Courses</h3>
+
+    <div class="row">
+
+        <div th:each="course : ${courses}" class="col-md-4">
+
+            <div class="card-3d mb-4">
+
+                <!-- Image -->
+                <img th:src="@{'/images/' + ${course.imageUrl}}"
+                     class="course-img">
+
+                <div class="card-body-custom">
+
+                    <h5 th:text="${course.title}"></h5>
+
+                    <p th:text="${course.description}" 
+                       style="font-size: 14px; color: gray;"></p>
+                       
+                        <p th:text="${course.price}" 
+                       style="font-size: 14px; color: gray;"></p>
+                       
+
+                    <!-- Student Action -->
+                    <div class="text-center mt-2">
+
+                       
+                            
+
+<a href="/login" class="btn btn-success btn-sm btn-custom">
+    🎓 Enroll Now
+</a>
+                       
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Empty -->
+    <div th:if="${#lists.isEmpty(courses)}" class="alert alert-info text-center">
+        No Courses Available Yet.
+    </div>
+
+</div>
+
+
+
+<style>
+.card-3d {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.4s;
+    background: #fff;
+}
+
+.card-3d:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.course-img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-body-custom {
+    padding: 15px;
+}
+
+.btn-custom {
+    border-radius: 30px;
+}
+
+
+.about-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    transition: 0.4s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.icon-box {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+
+
+
+</style>
+
+
+<!-- ABOUT -->
+<section id="about" class="py-5 about-section">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold display-6">Why Choose E Learning</h2>
+            <p class="text-muted">
+                Empowering Learners with World-Class Education, Expert Mentorship, and Cutting-Edge Digital Learning Experiences.
+            </p>
+        </div>
+
+        <div class="row">
+
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="about-card">
+                    <div class="icon-box">
+                        🎓
+                    </div>
+                    <h4>Expert Instructors</h4>
+                    <p>
+                        Learn from Industry Professionals and Experienced Educators who Bring Real-World
+                        Knowledge in Programming, Business, Design, and Emerging Technologies.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="about-card">
+                    <div class="icon-box">
+                        💻
+                    </div>
+                    <h4>Interactive Learning Platform</h4>
+                    <p>
+                        Experience Engaging Video Lectures, Hands-on Projects, Quizzes, and Real-Time
+                        Progress Tracking Designed for Effective and Flexible Learning.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="about-card">
+                    <div class="icon-box">
+                        🚀
+                    </div>
+                    <h4>Career Growth & Certification</h4>
+                    <p>
+                        Boost your Career with Industry-Recognized Certifications, Skill-Based Courses,
+                        and Job-Ready Training Programs Tailored for Modern Professionals.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Chatbot -->
+<style>
+    .chatbot-toggle {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 1050;
+        width: 68px;
+        height: 68px;
+        border: none;
+        border-radius: 22px;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(135deg, #d66b2d, #ef9a52);
+        box-shadow: 0 18px 35px rgba(214, 107, 45, 0.35);
+    }
+
+    .chatbot-panel {
+        position: fixed;
+        right: 24px;
+        bottom: 104px;
+        z-index: 1049;
+        width: min(380px, calc(100vw - 32px));
+        border-radius: 28px;
+        overflow: hidden;
+        background: rgba(255, 254, 251, 0.97);
+        border: 1px solid rgba(35, 27, 22, 0.08);
+        box-shadow: 0 28px 60px rgba(35, 27, 22, 0.2);
+        transform: translateY(18px) scale(0.98);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.28s ease;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .chatbot-panel.open {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .chatbot-header {
+        padding: 1rem 1.1rem;
+        color: white;
+        background: linear-gradient(135deg, #1f2937, #0f766e);
+    }
+
+    .chatbot-header p {
+        margin: 0.35rem 0 0;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 0.93rem;
+    }
+
+    .chatbot-body {
+        padding: 1rem;
+        max-height: 390px;
+        overflow-y: auto;
+        background: linear-gradient(180deg, rgba(244, 239, 231, 0.65), rgba(255, 255, 255, 0.96));
+    }
+
+    .chat-message {
+        max-width: 88%;
+        padding: 0.8rem 0.95rem;
+        border-radius: 18px;
+        margin-bottom: 0.8rem;
+        line-height: 1.45;
+        font-size: 0.95rem;
+        white-space: pre-line;
+    }
+
+    .chat-message.bot {
+        background: white;
+        color: #1e1a17;
+        border-top-left-radius: 6px;
+        box-shadow: 0 10px 22px rgba(41, 30, 22, 0.08);
+    }
+
+    .chat-message.user {
+        margin-left: auto;
+        background: linear-gradient(135deg, #d66b2d, #ea9550);
+        color: white;
+        border-top-right-radius: 6px;
+    }
+
+    .quick-prompts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 0.4rem;
+    }
+
+    .quick-prompts button {
+        border: 1px solid rgba(30, 26, 23, 0.09);
+        background: white;
+        color: #1e1a17;
+        padding: 0.55rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.86rem;
+        cursor: pointer;
+    }
+
+    .chatbot-input {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-top: 1px solid rgba(30, 26, 23, 0.08);
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        border: 1px solid rgba(30, 26, 23, 0.12);
+        border-radius: 16px;
+        padding: 0.85rem 1rem;
+        outline: none;
+    }
+
+    .chatbot-input button {
+        border: none;
+        border-radius: 16px;
+        padding: 0.85rem 1.1rem;
+        color: white;
+        cursor: pointer;
+        background: linear-gradient(135deg, #d66b2d, #ef9a52);
+    }
+
+    @media (max-width: 575px) {
+        .chatbot-toggle {
+            right: 16px;
+            bottom: 16px;
+        }
+
+        .chatbot-panel {
+            right: 16px;
+            bottom: 94px;
+        }
+    }
+</style>
+
+<button class="chatbot-toggle" id="chatToggle" type="button">AI</button>
+
+<section class="chatbot-panel" id="chatPanel">
+    <div class="chatbot-header">
+        <strong>Learning Assistant</strong>
+        <p>Ask about courses, registration, login, or support.</p>
+    </div>
+
+    <div class="chatbot-body" id="chatBody">
+        <div class="chat-message bot">
+            Hi! I am your homepage assistant. I can help you explore courses, register, login, or contact support.
+        </div>
+
+        <div class="quick-prompts">
+            <button type="button" data-prompt="What courses are available?">Courses</button>
+            <button type="button" data-prompt="How do I register?">Register</button>
+            <button type="button" data-prompt="How do I login?">Login</button>
+            <button type="button" data-prompt="How can I contact support?">Support</button>
+        </div>
+    </div>
+
+    <form class="chatbot-input" id="chatForm">
+        <input id="chatInput" type="text" placeholder="Type your question...">
+        <button type="submit">Send</button>
+    </form>
+</section>
+
+<script>
+    const chatToggle = document.getElementById('chatToggle');
+    const chatPanel = document.getElementById('chatPanel');
+    const chatBody = document.getElementById('chatBody');
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const quickPrompts = document.querySelectorAll('[data-prompt]');
+
+    const responses = [
+        {
+            keywords: ['course', 'courses', 'learn', 'catalog'],
+            reply: 'You can browse the available courses on the homepage in the courses section.'
+        },
+        {
+            keywords: ['register', 'signup', 'sign up', 'create account'],
+            reply: 'To create a new account, click the Register button in the navbar or open /register.'
+        },
+        {
+            keywords: ['login', 'sign in', 'log in'],
+            reply: 'You can log in from the Login button in the navbar or by opening /login.'
+        },
+        {
+            keywords: ['teacher', 'instructor'],
+            reply: 'Teachers can register, wait for approval, and then access the teacher dashboard after login.'
+        },
+        {
+            keywords: ['support', 'contact', 'help'],
+            reply: 'For support, open the Contact page from the menu or go to /contact.'
+        },
+        {
+            keywords: ['price', 'pricing', 'cost', 'fee'],
+            reply: 'Each course can show its price in the course section so users can compare easily.'
+        }
+    ];
+
+    function addMessage(text, role) {
+        const message = document.createElement('div');
+        message.className = `chat-message ${role}`;
+        message.textContent = text;
+        chatBody.appendChild(message);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function getReply(input) {
+        const normalized = input.toLowerCase();
+
+        const matched = responses.find(item =>
+            item.keywords.some(keyword => normalized.includes(keyword))
+        );
+
+        if (matched) {
+            return matched.reply;
+        }
+
+        return 'I can help with courses, registration, login, pricing, teacher access, or support.';
+    }
+
+    function sendPrompt(prompt) {
+        if (!prompt.trim()) return;
+
+        addMessage(prompt, 'user');
+
+        setTimeout(() => {
+            addMessage(getReply(prompt), 'bot');
+        }, 300);
+    }
+
+    chatToggle.addEventListener('click', () => {
+        chatPanel.classList.toggle('open');
+        if (chatPanel.classList.contains('open')) {
+            chatInput.focus();
+        }
+    });
+
+    chatForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const prompt = chatInput.value;
+        sendPrompt(prompt);
+        chatInput.value = '';
+    });
+
+    quickPrompts.forEach(button => {
+        button.addEventListener('click', () => {
+            sendPrompt(button.dataset.prompt || '');
+        });
+    });
+</script>
+
+
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

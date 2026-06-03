@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Enrollment Successful</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        /* Success Circle */
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #4CAF50;
+            stroke-miterlimit: 10;
+            margin: 0 auto 20px;
+            box-shadow: inset 0px 0px 0px #4CAF50;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            stroke: white;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.6s ease forwards 0.5s;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes fill {
+            100% { box-shadow: inset 0px 0px 0px 40px #4CAF50; }
+        }
+
+        h2 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        p {
+            color: gray;
+            font-size: 14px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 30px;
+            background: #4facfe;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #00c6ff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- Animated Check -->
+    <svg class="checkmark-circle" viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark" fill="none" d="M14 27l7 7 16-16"/>
+    </svg>
+
+    <h2>Enrollment Successful 🎉</h2>
+    <p>You have successfully enrolled in the course.</p>
+
+    <button class="btn" onclick="goToDashboard()">Go to MyCourses</button>
+
+</div>
+
+<script>
+    function goToDashboard() {
+        window.location.href = "/my-courses";
+    }
+
+    // Auto redirect after 3 seconds
+    setTimeout(() => {
+        window.location.href = "/my-courses";
+    }, 3000);
+</script>
+
+</body>
+</html>

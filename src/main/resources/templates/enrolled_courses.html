@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Courses</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: #fff;
+        }
+
+        .course-card {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            color: #000;
+            transition: 0.4s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .course-img {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 10px;
+        }
+
+        .btn-custom {
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">🎓 My Enrolled Courses</h2>
+
+    <div class="row">
+
+        <div th:each="enroll : ${enrollments}" class="col-md-4">
+
+            <div class="course-card mb-4">
+
+                <!-- Image -->
+                <img th:src="@{'/images/' + ${enroll.course.imageUrl}}" class="course-img">
+
+                <div class="p-3">
+
+                    <h5 th:text="${enroll.course.title}"></h5>
+
+                    <p th:text="${enroll.course.description}" style="font-size:14px;"></p>
+
+                    <!-- Progress -->
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-success"
+                             th:style="'width:' + ${T(java.lang.Math).random()*100} + '%'">
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <a th:href="@{'/course/' + ${enroll.course.id}}"
+                       class="btn btn-primary btn-sm w-100 btn-custom">
+                        ▶ Continue Learning
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Empty -->
+    <div th:if="${#lists.isEmpty(enrollments)}" class="alert alert-light text-center">
+        You have not enrolled in any course yet 😢
+    </div>
+
+</div>
+
+</body>
+</html>
